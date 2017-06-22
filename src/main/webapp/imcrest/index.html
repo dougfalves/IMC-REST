@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cálculo IMC REST</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        function calcular() {
+            $.ajax({
+                dataType: "json",
+                url: "http://localhost:9090/UFG-REST/imcrest?altura=" + document.forms["formulario"].elements["altura"].value + "&peso=" + document.forms["formulario"].elements["peso"].value
+            }).then(function(data) {
+                alert("Você possui: " + data.resultado);
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="col-md-12">
+    <div class="modal-dialog" style="margin-bottom:0">
+        <div class="modal-content">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cálculo de IMC (Versão REST)</h3>
+            </div>
+            <div class="panel-body">
+                <form name="formulario">
+                    <fieldset>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Altura em centímetros" name="altura" type="number" autofocus=""><br/>
+							<input class="form-control" placeholder="Peso em quilogramas" name="peso" type="number">
+                        </div>
+                        <button type="button" class="btn btn-sm btn-success" onclick="calcular()">Calcular</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
